@@ -1,0 +1,102 @@
+$primary-color: #FA9B0C;
+
+
+
+.App {
+    background-color: #464646;
+    min-height: 100vh;
+
+
+    &-header {
+        min-height: 20vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(10px + 2vmin);
+        
+        a{
+            color: $primary-color;
+            text-decoration: none;
+        }
+        h2{
+            color: white;
+            font-weight: 500;
+            font-size: calc(10px + 2vmin);
+        }
+        &-hamIcon{
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            top: 10vh;
+            right: 5vw;
+        }
+    }
+      
+    &-link {
+        color: #61dafb;
+    }
+    &-HomePage{
+        background-color: white;
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        padding: 4vh 5vw 4vh 5vw;
+
+        h2{
+            color: $primary-color;
+            text-align: center;
+            margin-bottom: 3vh;
+        }
+        &-lists{
+            width: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+
+            &-list{
+                position: relative;
+                justify-content: space-between;
+                align-items: center;
+                display: flex;
+                width: 100%;
+                margin: 10px;
+
+                p{
+                    cursor: pointer;
+                }
+
+                svg{
+                    cursor: pointer;
+                }
+
+                &-underline{
+                    position: absolute;
+                    width: 100%;
+                    bottom: -5px;
+                    height: 1.5px;
+                    background-color: #c3c3c3;
+                }
+            }
+            &-newList{
+                @extend .App-HomePage-lists-list;
+
+                input{
+                    border: 0;
+                    outline: none;
+                    
+                    font-size: inherit;
+                }
+
+            }
+        }
+    }
+
+    &-ListPage{
+        @extend .App-HomePage
+    }
+}
+  
+  

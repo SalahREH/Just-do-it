@@ -1,0 +1,77 @@
+.App {
+  background-color: #464646;
+  min-height: 100vh;
+}
+.App-header {
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+.App-header a {
+  color: #FA9B0C;
+  text-decoration: none;
+}
+.App-header h2 {
+  color: white;
+  font-weight: 500;
+  font-size: calc(10px + 2vmin);
+}
+.App-header-hamIcon {
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 10vh;
+  right: 5vw;
+}
+.App-link {
+  color: #61dafb;
+}
+.App-HomePage, .App-ListPage {
+  background-color: white;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  padding: 4vh 5vw 4vh 5vw;
+}
+.App-HomePage h2, .App-ListPage h2 {
+  color: #FA9B0C;
+  text-align: center;
+  margin-bottom: 3vh;
+}
+.App-HomePage-lists {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.App-HomePage-lists-list, .App-HomePage-lists-newList {
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  margin: 10px;
+}
+.App-HomePage-lists-list p, .App-HomePage-lists-newList p {
+  cursor: pointer;
+}
+.App-HomePage-lists-list svg, .App-HomePage-lists-newList svg {
+  cursor: pointer;
+}
+.App-HomePage-lists-list-underline {
+  position: absolute;
+  width: 100%;
+  bottom: -5px;
+  height: 1.5px;
+  background-color: #c3c3c3;
+}
+.App-HomePage-lists-newList input {
+  border: 0;
+  outline: none;
+  font-size: inherit;
+}
