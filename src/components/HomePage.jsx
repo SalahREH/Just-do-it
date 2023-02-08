@@ -35,7 +35,6 @@ function HomePage() {
   const removeList = id => {
     let newArr = [...lists].filter(list => list.id != id)
     setLists(newArr)
-
     updateLocalStorage(newArr)
   }
 

@@ -28,6 +28,8 @@ function ListPage() {
         if (e.keyCode == 13) {
             // setTasks(lists => lists.map((item, id) => (item == newValue.value) ? newValue.value : item))
             edit.value = e.target.value
+            updateLocalStorage(tasks)
+
             setEdit({ id: null, value: '' })
         }
     }
