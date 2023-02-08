@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { useLocation } from 'react-router-dom';
 
 function ListPage() {
-    const list = useLocation().state
+    const stateList = useLocation().state
     let [input, setInput] = useState("")
-    let [tasks, setTasks] = useState(list.tasks)
+    let [tasks, setTasks] = useState(stateList.tasks)
     let [edit, setEdit] = useState({ id: null, value: '' })
 
     const handleChange = e => {
@@ -17,6 +17,7 @@ function ListPage() {
         if (e.keyCode == 13) {
             tasks.push({id:uuidv4(), value: e.target.value})
             setTasks(tasks)
+            updateLocalStorage(tasks)
             setInput('')
         }
     }
@@ -27,6 +28,17 @@ function ListPage() {
             edit.value = e.target.value
             setEdit({ id: null, value: '' })
         }
+    }
+
+    const updateLocalStorage = (newTask) => {
+        
+        let changedList = JSON.parse(localStorage.getItem("lists")).map((list) => {
+            if(list.id === stateList.id){
+                list.tasks = newTask
+            } 
+            return list
+        })
+        localStorage.setItem("lists", JSON.stringify(changedList))
     }
 
     return (
@@ -45,7 +57,7 @@ function ListPage() {
                 </>
                 :
                 <>
-                    <h2>{list.name}</h2>
+                    <h2>{stateList.name}</h2>
                     <div className='App-ListPage-lists'>
                         {tasks.map((item, i) => (<div key={i} className='App-ListPage-lists-list'>
                             <p>{item.value}</p>

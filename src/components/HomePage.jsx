@@ -27,7 +27,7 @@ function HomePage() {
     if (e.keyCode == 13) {
       lists.push({ id: uuidv4(), name: e.target.value, tasks: [] })
       setLists(lists)
-      updateLocalStorage("lists", lists)
+      updateLocalStorage(lists)
       setInput('')
     }
   }
@@ -35,8 +35,8 @@ function HomePage() {
   const removeList = id => {
     let newArr = [...lists].filter(list => list.id != id)
     setLists(newArr)
-    if (newArr = []) updateLocalStorage("lists", [])
-    else updateLocalStorage("lists", lists)
+    
+    updateLocalStorage(newArr)
   }
 
 
@@ -49,31 +49,29 @@ function HomePage() {
       edit.name = e.target.value
       // setLists(lists => lists.map(item => (item.id === newValue.id) ? newValue : item))
       setEdit({ id: null })
-      updateLocalStorage("lists", lists)
+      updateLocalStorage(lists)
     }
   }
 
-  const updateLocalStorage = (key, item) => {
-    localStorage.setItem(`${key}`, JSON.stringify(item))
+  const updateLocalStorage = (item) => {
+    localStorage.setItem("lists", JSON.stringify(item))
   }
 
 
 
   useEffect(() => {
     (function pushinarr() {
-      let arr = []
-      if (!localStorList) {
-        for (let index = 0; index < 3; index++) {
-          let listObj = {
-            id: uuidv4(),
-            name: "Lista de la compra",
-            tasks: [{ id: uuidv4(), value: "cebolla" }, { id: uuidv4(), value: "patatas" }, { id: uuidv4(), value: "detergente" }, { id: uuidv4(), value: "leche" }]
-          };
-          arr.push(listObj)
-        }
-        setLists(arr)
-      } else setLists(localStorList)
-
+      // let arr = []
+      // for (let index = 0; index < 3; index++) {
+      //   let listObj = {
+      //     id: uuidv4(),
+      //     name: "Lista de la compra",
+      //     tasks: [{ id: uuidv4(), value: "cebolla" }, { id: uuidv4(), value: "patatas" }, { id: uuidv4(), value: "detergente" }, { id: uuidv4(), value: "leche" }]
+      //   };
+      //   arr.push(listObj)
+      // }
+      // setLists(arr) 
+      if (localStorList) setLists(localStorList)
     })()
   }, [])
 
@@ -87,7 +85,7 @@ function HomePage() {
           <div className='App-HomePage-lists'>
             <div className='App-HomePage-lists-newList'>
               <input type="text" placeholder={edit.name} onKeyDown={handleEditKeyDown} />
-              <CiEdit size={23}/>
+              <CiEdit size={23} />
               <div className='App-HomePage-lists-list-underline'></div>
             </div>
           </div>
@@ -103,7 +101,7 @@ function HomePage() {
                 <CiCircleRemove size={20} onClick={() => { removeList(item.id) }} />
                 <CiEdit size={23} onClick={() => { setEdit(item) }} />
               </div>
-                
+
               <div className='App-HomePage-lists-list-underline'></div>
             </div>))}
             <div className='App-HomePage-lists-newList'>
