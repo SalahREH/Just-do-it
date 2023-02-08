@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { v4 as uuidv4 } from 'uuid';
 import { useLocation } from 'react-router-dom';
@@ -17,14 +17,14 @@ function ListPage() {
 
     const handleKeyDown = e => {
         if (e.keyCode == 13) {
-            tasks.push({id:uuidv4(), value: e.target.value})
+            tasks.push({ id: uuidv4(), value: e.target.value })
             setTasks(tasks)
             updateLocalStorage(tasks)
             setInput('')
         }
     }
 
-    const handleEditKeyDown = e => {      
+    const handleEditKeyDown = e => {
         if (e.keyCode == 13) {
             // setTasks(lists => lists.map((item, id) => (item == newValue.value) ? newValue.value : item))
             edit.value = e.target.value
@@ -32,16 +32,34 @@ function ListPage() {
         }
     }
 
+    const removeList = id => {
+        let newArr = [...tasks].filter(task => task.id != id)
+        setTasks(newArr)
+        updateLocalStorage(newArr)
+    }
+
     const updateLocalStorage = (newTask) => {
-        
+
         let changedList = JSON.parse(localStorage.getItem("lists")).map((list) => {
-            if(list.id === stateList.id){
+            if (list.id === stateList.id) {
                 list.tasks = newTask
-            } 
+            }
             return list
         })
         localStorage.setItem("lists", JSON.stringify(changedList))
     }
+
+    useEffect(()=>{
+        let localStorageList = JSON.parse(localStorage.getItem("lists"))
+        if(localStorageList){
+            localStorageList.map(list => {
+            if(list.id == stateList.id){
+                setTasks(list.tasks)
+            }
+        })
+        }
+        
+    }, [])
 
     return (
         <div className='App-ListPage'>
@@ -51,7 +69,6 @@ function ListPage() {
                     <div className='App-HomePage-lists'>
                         <div className='App-HomePage-lists-newList'>
                             <input type="text" placeholder={edit.value} onKeyDown={handleEditKeyDown} />
-
                             <BsThreeDotsVertical />
                             <div className='App-HomePage-lists-list-underline'></div>
                         </div>
@@ -64,8 +81,10 @@ function ListPage() {
                         {tasks.map((item, i) => (<div key={i} className='App-ListPage-lists-list'>
                             <p>{item.value}</p>
                             {/* <img> urgent  with react-icons </img> */}
-                            {/* <CiCircleRemove size={20} onClick={() => { removeList(item.id) }} /> */}
-                            <CiEdit size={23} onClick={() => { setEdit(item) }} />
+                            <div>
+                                <CiCircleRemove size={20} onClick={() => { removeList(item.id) }} />
+                                <CiEdit size={23} onClick={() => { setEdit(item) }} />
+                            </div>
                             <div className='App-ListPage-lists-list-underline'></div>
                         </div>))}
                         <div className='App-ListPage-lists-newList' /* onClick={navigate("")} */>

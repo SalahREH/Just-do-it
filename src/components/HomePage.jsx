@@ -35,7 +35,7 @@ function HomePage() {
   const removeList = id => {
     let newArr = [...lists].filter(list => list.id != id)
     setLists(newArr)
-    
+
     updateLocalStorage(newArr)
   }
 
@@ -60,19 +60,7 @@ function HomePage() {
 
 
   useEffect(() => {
-    (function pushinarr() {
-      // let arr = []
-      // for (let index = 0; index < 3; index++) {
-      //   let listObj = {
-      //     id: uuidv4(),
-      //     name: "Lista de la compra",
-      //     tasks: [{ id: uuidv4(), value: "cebolla" }, { id: uuidv4(), value: "patatas" }, { id: uuidv4(), value: "detergente" }, { id: uuidv4(), value: "leche" }]
-      //   };
-      //   arr.push(listObj)
-      // }
-      // setLists(arr) 
-      if (localStorList) setLists(localStorList)
-    })()
+    if (localStorList) setLists(localStorList)
   }, [])
 
 
