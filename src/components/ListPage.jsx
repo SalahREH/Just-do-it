@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { v4 as uuidv4 } from 'uuid';
 import { useLocation } from 'react-router-dom';
+import { CiCircleRemove, CiEdit } from "react-icons/ci";
+
 
 function ListPage() {
     const stateList = useLocation().state
@@ -62,7 +64,8 @@ function ListPage() {
                         {tasks.map((item, i) => (<div key={i} className='App-ListPage-lists-list'>
                             <p>{item.value}</p>
                             {/* <img> urgent  with react-icons </img> */}
-                            <BsThreeDotsVertical onClick={() => { setEdit(item) }} />
+                            {/* <CiCircleRemove size={20} onClick={() => { removeList(item.id) }} /> */}
+                            <CiEdit size={23} onClick={() => { setEdit(item) }} />
                             <div className='App-ListPage-lists-list-underline'></div>
                         </div>))}
                         <div className='App-ListPage-lists-newList' /* onClick={navigate("")} */>
